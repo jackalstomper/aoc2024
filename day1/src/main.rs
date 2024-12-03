@@ -18,8 +18,8 @@ fn part1() {
 	left.sort();
 	right.sort();
 	let mut sum = 0;
-	for (i, e) in left.iter().enumerate() {
-		sum += (right[i] - e).abs();
+	for (l, r) in left.iter().zip(right.iter()) {
+		sum += (r - l).abs();
 	}
 
 	println!("Sum: {}", sum);
@@ -36,7 +36,7 @@ fn part2() {
 		let left = i.next().unwrap();
 		let right = i.next().unwrap();
 		let count = match counts.get(&right) {
-			Some(e) => *e,
+			Some(&e) => e,
 			None => 0,
 		};
 		counts.insert(right, count + 1);
@@ -45,7 +45,7 @@ fn part2() {
 	let mut sum = 0;
 	for left in left_list {
 		let count = match counts.get(&left) {
-			Some(e) => *e,
+			Some(&e) => e,
 			None => 0,
 		};
 		sum += left * count;
